@@ -1,0 +1,11 @@
+CREATE SCHEMA IF NOT EXISTS shop;
+
+
+CREATE TABLE IF NOT EXISTS `customer` (
+     id INT PRIMARY KEY AUTO_INCREMENT,
+     first_name NVARCHAR(60) NOT NULL,
+     last_name NVARCHAR(60) NOT NULL,
+     username NVARCHAR(60) NOT NULL,
+     password NVARCHAR(60) NOT NULL,
+     email NVARCHAR(120) NOT NULL
+)

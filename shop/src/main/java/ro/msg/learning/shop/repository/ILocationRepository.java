@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import ro.msg.learning.shop.model.Location;
 
 @Repository
-public interface ILocationRepository extends JpaRepository<Location, Long> {
+public interface ILocationRepository extends JpaRepository<Location, Integer> {
 }

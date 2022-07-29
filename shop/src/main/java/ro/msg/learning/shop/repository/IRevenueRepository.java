@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import ro.msg.learning.shop.model.Revenue;
 
 @Repository
-public interface IRevenueRepository extends JpaRepository<Revenue,Long> {
+public interface IRevenueRepository extends JpaRepository<Revenue,Integer> {
 }

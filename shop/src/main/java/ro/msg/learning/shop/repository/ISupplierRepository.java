@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import ro.msg.learning.shop.model.Supplier;
 
 @Repository
-public interface ISupplierRepository extends JpaRepository<Supplier,Long> {
+public interface ISupplierRepository extends JpaRepository<Supplier,Integer> {
 }

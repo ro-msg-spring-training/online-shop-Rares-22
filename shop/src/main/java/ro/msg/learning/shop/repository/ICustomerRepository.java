@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ro.msg.learning.shop.model.Customer;
 @Repository
-public interface ICustomerRepository extends JpaRepository<Customer,Long> {
+public interface ICustomerRepository extends JpaRepository<Customer,Integer> {
 }

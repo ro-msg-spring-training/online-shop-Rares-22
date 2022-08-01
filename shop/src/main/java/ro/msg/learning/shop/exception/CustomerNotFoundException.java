@@ -1,4 +1,4 @@
-package ro.msg.learning.shop.payroll;
+package ro.msg.learning.shop.exception;
 
 public class CustomerNotFoundException extends RuntimeException {
     public CustomerNotFoundException(Integer id) {

@@ -4,42 +4,45 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ro.msg.learning.shop.DTO.ProductCategoryDTO;
+import ro.msg.learning.shop.exception.ProductNotFoundException;
 import ro.msg.learning.shop.model.Product;
+import ro.msg.learning.shop.repository.IProductRepository;
 import ro.msg.learning.shop.service.ProductService;
 
 import java.util.List;
 
 @RestController
 public class ProductController {
-    ProductService productService;
 
-    @RequestMapping(value = "/products", method = RequestMethod.GET)
-    @ResponseBody
-    public ResponseEntity<Object> getAllProductCategory() {
-        //productService.getAllProductCategory();
-        return new ResponseEntity<>("Products", HttpStatus.OK);
+    private final IProductRepository product;
+
+    ProductController(IProductRepository product) {
+        this.product = product;
+    }
+
+    @GetMapping("/products")
+    List<Product> all() {
+        return product.findAll();
+    }
+    // end::get-aggregate-root[]
+
+    @PostMapping("/products")
+    Product NewProduct(@RequestBody Product newProduct) {
+        return product.save(newProduct);
+    }
+
+    // Single item
+
+    @GetMapping("/products/{id}")
+    Product one(@PathVariable Integer id) {
+
+        return product.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException(id));
     }
 
 
-    @RequestMapping(value = "/products/{id}", method = RequestMethod.PUT)
-    @ResponseBody
-    public ResponseEntity<Object>
-    updateProduct(@PathVariable("id") Integer id, @RequestBody Product product) {
-
-        productService.updateProduct(id, product);
-        return new ResponseEntity<>("Product is updated successsfully", HttpStatus.OK);
-    }
-    @RequestMapping(value = "/products/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
-    public ResponseEntity<Object> delete(@PathVariable("id") Integer id) {
-        productService.deleteProduct(id);
-        return new ResponseEntity<>("Product is deleted successsfully", HttpStatus.OK);
-    }
-    @RequestMapping(value = "/products", method = RequestMethod.POST)
-    @ResponseBody
-    public ResponseEntity<Object> createProduct(@RequestBody Product product) {
-        productService.createProduct(product);
-        return new ResponseEntity<>("Product is created successfully", HttpStatus.CREATED);
+    @DeleteMapping("/products/{id}")
+    void deleteProduct(@PathVariable Integer id) {
+        product.deleteById(id);
     }
 }

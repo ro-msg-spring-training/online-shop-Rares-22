@@ -2,7 +2,7 @@ package ro.msg.learning.shop.controller;
 
 import org.springframework.web.bind.annotation.*;
 import ro.msg.learning.shop.model.Customer;
-import ro.msg.learning.shop.payroll.CustomerNotFoundException;
+import ro.msg.learning.shop.exception.CustomerNotFoundException;
 import ro.msg.learning.shop.repository.ICustomerRepository;
 
 import java.util.List;

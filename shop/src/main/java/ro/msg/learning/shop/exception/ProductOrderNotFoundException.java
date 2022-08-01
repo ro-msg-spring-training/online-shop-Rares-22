@@ -1,4 +1,4 @@
-package ro.msg.learning.shop.payroll;
+package ro.msg.learning.shop.exception;
 
 public class ProductOrderNotFoundException extends RuntimeException {
     public ProductOrderNotFoundException(Integer id) {

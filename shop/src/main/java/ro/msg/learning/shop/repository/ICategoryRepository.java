@@ -4,5 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import ro.msg.learning.shop.model.Category;
 @Repository
-public interface ICategoryInterface extends JpaRepository<Category,Integer> {
+public interface ICategoryRepository extends JpaRepository<Category,Integer> {
 }

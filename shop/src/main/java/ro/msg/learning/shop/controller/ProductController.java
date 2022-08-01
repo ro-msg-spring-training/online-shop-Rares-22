@@ -12,14 +12,12 @@ import java.util.List;
 
 @RestController
 public class ProductController {
-
-    @Autowired
     ProductService productService;
 
     @RequestMapping(value = "/products", method = RequestMethod.GET)
     @ResponseBody
     public ResponseEntity<Object> getAllProductCategory() {
-        productService.getAllProductCategory();
+        //productService.getAllProductCategory();
         return new ResponseEntity<>("Products", HttpStatus.OK);
     }
 

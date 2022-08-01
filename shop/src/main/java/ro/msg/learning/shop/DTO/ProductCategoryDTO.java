@@ -1,17 +1,16 @@
 package ro.msg.learning.shop.DTO;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.math.BigDecimal;
+import lombok.NoArgsConstructor;
+import ro.msg.learning.shop.model.BaseEntity;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 
-public class ProductCategoryDTO {
-    private int id;
+public class ProductCategoryDTO extends BaseEntity {
     private String name;
     private String description;
-    private BigDecimal price;
-    private Double weight;
-    private String imageUrl;
 
 }

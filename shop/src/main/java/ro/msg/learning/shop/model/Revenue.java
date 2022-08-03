@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.math.BigDecimal;
 import java.sql.Date;
 import javax.persistence.Entity;
@@ -22,7 +21,7 @@ import javax.persistence.Table;
 
 public class Revenue extends BaseEntity{
 
-    private Date dataRevenue;
+    private Date data_revenue;
     private BigDecimal sum;
 
     @ManyToOne

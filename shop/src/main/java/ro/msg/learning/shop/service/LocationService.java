@@ -5,7 +5,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ro.msg.learning.shop.model.Location;
 import ro.msg.learning.shop.repository.ILocationRepository;
-
 import java.util.List;
 
 @Service

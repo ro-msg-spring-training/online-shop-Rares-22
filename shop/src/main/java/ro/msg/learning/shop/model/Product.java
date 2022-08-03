@@ -5,13 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 @Entity
 @Table(name="PRODUCT")
 
@@ -20,7 +20,7 @@ public class Product extends BaseEntity{
     private String description;
     private BigDecimal price;
     private Double weight;
-    private String imageUrl;
+    private String image_url;
 
     @ManyToOne
     @JoinColumn(name = "category_id")

@@ -1,7 +1,6 @@
 package ro.msg.learning.shop.model;
 
 import lombok.Data;
-
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -10,5 +9,5 @@ import javax.persistence.MappedSuperclass;
 
 public class BaseEntity {
     @Id
-    private int id;
+    private Integer id;
 }

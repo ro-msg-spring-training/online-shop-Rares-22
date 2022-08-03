@@ -12,12 +12,12 @@ import ro.msg.learning.shop.strategy.SingleLocation;
 public class LocationConfiguration {
 
     @Bean
-    public ILocationStrategy createOrderStrategy(@Value("${strategy}") String strategy, MostAbundant mostAbundant, SingleLocation singleLocation) {
+    public ILocationStrategy createOrderStrategy(@Value("${strategy}") String strategy) {
         switch (strategy) {
             case "SingleLocation":
-                return singleLocation;
+                return new SingleLocation();
             case "MostAbundant":
-                return mostAbundant;
+                return new MostAbundant();
             default:
                 throw new StrategyException("Select a valid strategy!");
         }

@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -13,7 +12,7 @@ import javax.persistence.Table;
 @Data
 @Builder
 @Entity
-@Table(name="CUSTOMER")
+@Table(name="customer")
 public class Customer extends BaseEntity{
 
     private String first_name;

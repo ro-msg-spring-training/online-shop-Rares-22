@@ -7,8 +7,5 @@ import java.util.Collection;
 
 public interface IOrderService {
 
-    void createProductOrder(ProductOrder order);
-    void updateProductOrder(Integer id, ProductOrder order);
-    void deleteProductOrder(Integer id);
-    Collection<ProductOrder> getProductOrders();
+
 }

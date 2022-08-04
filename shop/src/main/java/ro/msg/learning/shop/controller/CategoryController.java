@@ -27,12 +27,12 @@ public class CategoryController {
     public ResponseEntity<ProductCategoryDTO> createProduct(@RequestBody ProductCategoryDTO productDto) {
         Supplier supplier = supplierService.findSupplierByName(productDto.getSupplier_name());
         Category productCategory = productCategoryService.findByName(productDto.getCategory_name());
-        Product product = ProductCategoryBuilder.returnEntityFromDto(productDto, supplier, productCategory);
+        Product product = ProductCategoryBuilder.returnEntityFromDto(productDto);
         Product savedProduct = productService.createProduct(product);
 
         return ResponseEntity.accepted().body(ProductCategoryBuilder.returnDtoFromEntity(savedProduct));
     }
-    @GetMapping( "/readAll")
+    @GetMapping( "/get")
     public ResponseEntity<List<ProductCategoryDTO>> readAllProducts() {
         List<ProductCategoryDTO> productDtos = productService.getProducts()
                 .stream()
@@ -59,7 +59,7 @@ public class CategoryController {
     public ResponseEntity<ProductCategoryDTO> updateProduct(@RequestBody ProductCategoryDTO productDto) {
         Supplier supplier = supplierService.findSupplierByName(productDto.getSupplier_name());
         Category productCategory = productCategoryService.findByName(productDto.getCategory_name());
-        Product product = ProductCategoryBuilder.returnEntityFromDto(productDto, supplier, productCategory);
+        Product product = ProductCategoryBuilder.returnEntityFromDto(productDto);
         Product updatedProduct = productService.updateProduct(product.getId(), product);
 
         return ResponseEntity.accepted().body(ProductCategoryBuilder.returnDtoFromEntity(updatedProduct));

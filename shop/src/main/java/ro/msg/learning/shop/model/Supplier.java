@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Data
@@ -16,6 +17,7 @@ import javax.persistence.Table;
 @Table(name="SUPPLIER")
 
 public class Supplier extends BaseEntity{
+
     private String name;
 
 }

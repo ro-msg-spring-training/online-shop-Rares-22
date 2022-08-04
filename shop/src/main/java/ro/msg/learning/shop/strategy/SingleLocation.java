@@ -2,19 +2,14 @@ package ro.msg.learning.shop.strategy;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import ro.msg.learning.shop.dto.ProductOrderDTO;
-import ro.msg.learning.shop.model.Location;
-import ro.msg.learning.shop.model.Product;
+
 import ro.msg.learning.shop.model.Stock;
-import ro.msg.learning.shop.exception.StrategyException;
 import ro.msg.learning.shop.repository.IStockRepository;
-import ro.msg.learning.shop.service.LocationService;
-import ro.msg.learning.shop.service.StockService;
 
 import javax.transaction.Transactional;
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 
 @RequiredArgsConstructor
@@ -24,23 +19,33 @@ public class SingleLocation implements ILocationStrategy{
     IStockRepository stockRepository;
 
     @Override
-    public List<Stock> findBestLocations(List<ProductOrderDTO> listOfOrderedProducts) {
-        List<Stock> stocks = stockRepository.findAll()
-                .stream()
-                .sorted(Comparator.comparing(Stock::getQuantity).reversed())
-                .collect(Collectors.toList());
+    public List<Stock> findBestLocations(List<ProductOrderDTO> listOfOrderedProducts){
+        List<Stock> stocks = stockRepository.findAll();
+        Map<Integer, List<Stock>> locationList = new HashMap<>();
 
-        List<Stock> mostAbundantStocks = new ArrayList<>();
+        stocks.forEach(stock -> listOfOrderedProducts.forEach(product -> {
+            if (stock.getProduct().getId().equals(product.getProductId()) &&
+                    stock.getQuantity() >= product.getQuantity()) {
+                Integer locationID = stock.getLocation().getId();
 
-        listOfOrderedProducts.forEach(product -> {
-            for(Stock stock: stocks) {
-                if (stock.getProduct().getId().equals(product.getProductId()) &&
-                        stock.getQuantity() >= product.getQuantity()) {
-                    mostAbundantStocks.add(stock);
-                    break;
-                }
+                List<Stock> listOfStocksByLocationId = locationList.get(locationID);
+                if (listOfStocksByLocationId == null)
+                    listOfStocksByLocationId = new ArrayList<>();
+
+                listOfStocksByLocationId.add(stock);
+                locationList.put(locationID, listOfStocksByLocationId);
             }
-        });
-        return mostAbundantStocks;
+        }));
+
+        List<Stock> singleLocationStocks = null;
+        Iterator<Map.Entry<Integer,List<Stock>>> it = locationList.entrySet().iterator();
+        while(it.hasNext()){
+            Map.Entry<Integer,List<Stock>> pair = it.next();
+            if(pair.getValue().size() == listOfOrderedProducts.size()){
+                singleLocationStocks = new ArrayList<>(pair.getValue());
+                break;
+            }
+        }
+        return singleLocationStocks;
     }
 }
